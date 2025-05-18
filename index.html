@@ -1,45 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crazy Bot Commands</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #ffcb05;
+    }
+    h2 {
+      color: #00eaff;
+      margin-top: 2rem;
+    }
+    ul {
+      list-style: square;
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Crazy Bot Command List</h1>
+  <div id="command-list"></div>
 
+  <script>
+    const commands = {
+      Moderation: [
+        '/ban - Ban a user from the server',
+        '/kick - Kick a user from the server',
+        '/timeout - Temporarily restrict a user',
+        '/warn - Warn a user and log the infraction',
+        '/unban - Unban a user from the server',
+        '/purge - Delete multiple messages at once',
+        '/lockdown - Lock channels during emergencies',
+        '/unlock - Unlock a locked channel',
+        '/infractions - View a user\'s infractions',
+      ],
+      Utility: [
+        '/poll - Create a poll for users to vote on',
+        '/remind - Set a reminder',
+        '/random - Generate random numbers/roll dice',
+        '/weather - Get weather information for a location',
+        '/movie - Get information about a movie',
+        '/quote - Get an inspirational or funny quote',
+        '/search - Search anything on the web',
+      ],
+      Additional: [
+        '/suggest - Submit a suggestion for the server/bot',
+        '/embed - Create a custom embed message',
+        '/afk - Set your AFK status',
+        '/invites - View invite statistics',
+        '/botinfo - Display detailed bot information',
+        '/panel - Access the bot dashboard',
+      ],
+      Role: [
+        '/addrole - Add a role to a user',
+        '/removerole - Remove a role from a user',
+        '/roles - List all roles in the server',
+        '/createrole - Create a new role',
+        '/deleterole - Delete a role',
+      ],
+      Welcome: [
+        // Add welcome-related commands here if needed
+      ]
+    };
 
-import React, { useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import { Github, LogIn, BookOpen, Zap } from 'lucide-react';
+    const container = document.getElementById('command-list');
 
-const commands = {
-  Moderation: [
-    '/ban - Ban a user from the server',
-    '/kick - Kick a user from the server',
-    '/timeout - Temporarily restrict a user',
-    '/warn - Warn a user and log the infraction',
-    '/unban - Unban a user from the server',
-    '/purge - Delete multiple messages at once',
-    '/lockdown - Lock channels during emergencies',
-    '/unlock - Unlock a locked channel',
-    '/infractions - View a user\'s infractions',
-  ],
-  Utility: [
-    '/poll - Create a poll for users to vote on',
-    '/remind - Set a reminder',
-    '/random - Generate random numbers/roll dice',
-    '/weather - Get weather information for a location',
-    '/movie - Get information about a movie',
-    '/quote - Get an inspirational or funny quote',
-    '/search - Search anything on the web',
-  ],
-  Additional: [
-    '/suggest - Submit a suggestion for the server/bot',
-    '/embed - Create a custom embed message',
-    '/afk - Set your AFK status',
-    '/invites - View invite statistics',
-    '/botinfo - Display detailed bot information',
-    '/panel - Access the bot dashboard',
-  ],
-  Role: [
-    '/addrole - Add a role to a user',
-    '/removerole - Remove a role from a user',
-    '/roles - List all roles in the server',
-    '/createrole - Create a new role',
-    '/deleterole - Delete a role',
-  ],
-  Welcome: [
+    for (const category in commands) {
+      const section = document.createElement('div');
+      const heading = document.createElement('h2');
+      heading.textContent = category;
+      section.appendChild(heading);
+
+      const ul = document.createElement('ul');
+      commands[category].forEach(cmd => {
+        const li = document.createElement('li');
+        li.textContent = cmd;
+        ul.appendChild(li);
+      });
+
+      section.appendChild(ul);
+      container.appendChild(section);
+    }
+  </script>
+</body>
+</html>
