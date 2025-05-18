@@ -126,7 +126,9 @@
   <div class="buttons">
     <a class="button" href="https://discord.com/oauth2/authorize?client_id=1373308171317149736" target="_blank">Invite Crazy Bot 🚀</a>
     <a class="button" href="#commands">View Commands 📜</a>
-    <a class="button" href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=https%3A%2F%2Fyour-website.com%2Fcallback&response_type=code&scope=identify%20guilds" target="_blank">Login with Discord 🔐</a>
+    <a class="button" href="https://discord.com/oauth2/authorize?client_id=1373308171317149736&redirect_uri=https%3A%2F%2Fdiscord.com%2Foauth2%2Fauthorized&response_type=code&scope=identify%20guilds" target="_blank">
+      Login with Discord 🔐
+    </a>
   </div>
 
   <div id="commands"></div>
@@ -203,7 +205,7 @@
       setTimeout(() => {
         let reply = "🤖 I'm here to help! Ask about commands, roles, or events!";
         const lower = text.toLowerCase();
-        if (lower.includes("invite")) reply = "🚀 Here's the invite link: ";
+        if (lower.includes("invite")) reply = "🚀 Here's the invite link: https://discord.com/oauth2/authorize?client_id=1373308171317149736";
         else if (lower.includes("commands")) reply = "📜 Scroll down to see all the command categories!";
         else if (lower.includes("role")) reply = "🎭 Use /addrole or /removerole to manage roles!";
         addMessage("Crazy Bot", reply);
@@ -214,8 +216,8 @@
       if (event.key === "Enter") sendMessage();
     });
 
-    // Parse emojis when the page loads
     window.onload = () => twemoji.parse(document.body);
   </script>
 </body>
 </html>
+  
