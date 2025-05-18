@@ -3,18 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crazy Bot Commands</title>
+  <title>Crazy Bot Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #fff;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #1e1e2f, #12121a);
+      color: white;
+      text-align: center;
       padding: 2rem;
     }
     h1 {
-      text-align: center;
+      font-size: 3rem;
       color: #ffcb05;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .button {
+      background: #ffcb05;
+      color: #1e1e2f;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(255, 203, 5, 0.4);
+    }
+    .button:hover {
+      background: #ffe066;
+      transform: scale(1.05);
     }
     h2 {
       color: #00eaff;
@@ -22,77 +58,158 @@
     }
     ul {
       list-style: square;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
       padding-left: 1.5rem;
     }
     li {
       margin-bottom: 0.5rem;
     }
+    #chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      z-index: 999;
+    }
+    #chatbot-header {
+      background-color: #ffcb05;
+      padding: 10px;
+      font-weight: bold;
+      color: #1e1e2f;
+    }
+    #chatbot-messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      color: black;
+    }
+    #chatbot-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    #chatbot-input input {
+      flex-grow: 1;
+      border: none;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    #chatbot-input button {
+      background-color: #ffcb05;
+      border: none;
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
   </style>
 </head>
 <body>
-  <h1>Crazy Bot Command List</h1>
-  <div id="command-list"></div>
+  <h1>Crazy Bot</h1>
+  <p>Your all-in-one Discord bot for moderation, fun, and community engagement. Try out our features now!</p>
+
+  <div class="buttons">
+    <a class="button" href="https://discord.com/oauth2/authorize?client_id=1373308171317149736" target="_blank">Invite Crazy Bot</a>
+    <a class="button" href="#commands">View Commands</a>
+  </div>
+
+  <div id="commands"></div>
+
+  <div id="chatbot">
+    <div id="chatbot-header">Crazy AI Bot</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+      <input type="text" id="userInput" placeholder="Ask me anything...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Crazy Bot. All rights reserved.</p>
+  </footer>
 
   <script>
-    const commands = {
+    const commandData = {
       Moderation: [
-        '/ban - Ban a user from the server',
-        '/kick - Kick a user from the server',
-        '/timeout - Temporarily restrict a user',
-        '/warn - Warn a user and log the infraction',
-        '/unban - Unban a user from the server',
-        '/purge - Delete multiple messages at once',
-        '/lockdown - Lock channels during emergencies',
-        '/unlock - Unlock a locked channel',
-        '/infractions - View a user\'s infractions',
+        '/ban - Ban a user', '/kick - Kick a user', '/timeout - Restrict temporarily',
+        '/warn - Warn a user', '/unban - Unban a user', '/purge - Delete messages',
+        '/lockdown - Lock channel', '/unlock - Unlock channel', '/infractions - View logs'
       ],
       Utility: [
-        '/poll - Create a poll for users to vote on',
-        '/remind - Set a reminder',
-        '/random - Generate random numbers/roll dice',
-        '/weather - Get weather information for a location',
-        '/movie - Get information about a movie',
-        '/quote - Get an inspirational or funny quote',
-        '/search - Search anything on the web',
+        '/poll - Create a poll', '/remind - Set a reminder', '/random - Random number',
+        '/weather - Weather info', '/movie - Movie info', '/quote - Random quote',
+        '/search - Search the web'
       ],
       Additional: [
-        '/suggest - Submit a suggestion for the server/bot',
-        '/embed - Create a custom embed message',
-        '/afk - Set your AFK status',
-        '/invites - View invite statistics',
-        '/botinfo - Display detailed bot information',
-        '/panel - Access the bot dashboard',
+        '/suggest - Submit suggestion', '/embed - Custom embed', '/afk - Set AFK',
+        '/invites - View invites', '/botinfo - Bot info', '/panel - Bot dashboard'
       ],
       Role: [
-        '/addrole - Add a role to a user',
-        '/removerole - Remove a role from a user',
-        '/roles - List all roles in the server',
-        '/createrole - Create a new role',
-        '/deleterole - Delete a role',
-      ],
-      Welcome: [
-        // Add welcome-related commands here if needed
+        '/addrole - Add role', '/removerole - Remove role', '/roles - List roles',
+        '/createrole - Create role', '/deleterole - Delete role'
       ]
     };
 
-    const container = document.getElementById('command-list');
-
-    for (const category in commands) {
+    const container = document.getElementById('commands');
+    for (const category in commandData) {
       const section = document.createElement('div');
       const heading = document.createElement('h2');
       heading.textContent = category;
       section.appendChild(heading);
 
       const ul = document.createElement('ul');
-      commands[category].forEach(cmd => {
+      commandData[category].forEach(cmd => {
         const li = document.createElement('li');
         li.textContent = cmd;
         ul.appendChild(li);
       });
-
       section.appendChild(ul);
       container.appendChild(section);
     }
+
+    const messages = document.getElementById("chatbot-messages");
+    const input = document.getElementById("userInput");
+
+    function addMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.textContent = `${sender}: ${text}`;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage("You", text);
+      input.value = "";
+
+      setTimeout(() => {
+        let reply = "I'm here to help! Ask me about commands, roles, or features!";
+        const lower = text.toLowerCase();
+        if (lower.includes("invite")) reply = "Here's the invite link: https://discord.com/oauth2/authorize?client_id=1373308171317149736";
+        else if (lower.includes("commands")) reply = "Scroll down to see all command categories!";
+        else if (lower.includes("role")) reply = "You can use /addrole or /removerole!";
+        addMessage("Crazy Bot", reply);
+      }, 600);
+    }
+
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") sendMessage();
+    });
   </script>
 </body>
 </html>
