@@ -1,223 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crazy Bot Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
-    }
-    body {
-      background: linear-gradient(to right, #1e1e2f, #12121a);
-      color: white;
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 3rem;
-      color: #ffcb05;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-inline: auto;
-    }
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .button {
-      background: #ffcb05;
-      color: #1e1e2f;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(255, 203, 5, 0.4);
-    }
-    .button:hover {
-      background: #ffe066;
-      transform: scale(1.05);
-    }
-    h2 {
-      color: #00eaff;
-      margin-top: 2rem;
-    }
-    ul {
-      list-style: square;
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      padding-left: 1.5rem;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    #chatbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      height: 400px;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
-      z-index: 999;
-    }
-    #chatbot-header {
-      background-color: #ffcb05;
-      padding: 10px;
-      font-weight: bold;
-      color: #1e1e2f;
-    }
-    #chatbot-messages {
-      flex-grow: 1;
-      padding: 10px;
-      overflow-y: auto;
-      background-color: #f9f9f9;
-      color: black;
-    }
-    #chatbot-input {
-      display: flex;
-      border-top: 1px solid #ccc;
-    }
-    #chatbot-input input {
-      flex-grow: 1;
-      border: none;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    #chatbot-input button {
-      background-color: #ffcb05;
-      border: none;
-      padding: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Install Jupot Bot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    text-align: center;
+  }
+  .container {
+    background: rgba(255,255,255,0.1);
+    padding: 3rem 4rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    max-width: 400px;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #d9dbff;
+  }
+  a.button {
+    display: inline-block;
+    background: #fff;
+    color: #4e54c8;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.4);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  a.button:hover {
+    background-color: #3b40a4;
+    color: #f0f0ff;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  }
+  footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #c7c9ff;
+  }
+</style>
 </head>
 <body>
-  <h1>🤖 Crazy Bot</h1>
-  <p>✨ Your all-in-one Discord bot for moderation, fun, and community! 😎</p>
-
-  <div class="buttons">
-    <a class="button" href="https://discord.com/oauth2/authorize?client_id=1373308171317149736" target="_blank">Invite Crazy Bot 🚀</a>
-    <a class="button" href="#commands">View Commands 📜</a>
-    <a class="button" href="https://discord.com/oauth2/authorize?client_id=1373308171317149736&redirect_uri=https%3A%2F%2Fdiscord.com%2Foauth2%2Fauthorized&response_type=code&scope=identify%20guilds" target="_blank">
-      Login with Discord 🔐
-    </a>
+  <div class="container" role="main">
+    <h1>Jupot</h1>
+    <p>Install the Jupot Discord Bot now to elevate your server experience!</p>
+    <a
+      href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&amp;scope=bot&amp;permissions=8"
+      class="button"
+      aria-label="Install Jupot Bot on Discord"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Add Jupot to Your Server</a
+    >
+    <footer>© 2024 Jupot.gg.bot</footer>
   </div>
-
-  <div id="commands"></div>
-
-  <div id="chatbot">
-    <div id="chatbot-header">💬 Crazy AI Bot</div>
-    <div id="chatbot-messages"></div>
-    <div id="chatbot-input">
-      <input type="text" id="userInput" placeholder="Ask me anything...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Crazy Bot. All rights reserved. 🎉</p>
-  </footer>
-
-  <script>
-    const commandData = {
-      Moderation: [
-        '/ban - Ban a user', '/kick - Kick a user', '/timeout - Restrict temporarily',
-        '/warn - Warn a user', '/unban - Unban a user', '/purge - Delete messages',
-        '/lockdown - Lock channel', '/unlock - Unlock channel', '/infractions - View logs'
-      ],
-      Utility: [
-        '/poll - Create a poll', '/remind - Set a reminder', '/random - Random number',
-        '/weather - Weather info', '/movie - Movie info', '/quote - Random quote',
-        '/search - Search the web'
-      ],
-      Additional: [
-        '/suggest - Submit suggestion', '/embed - Custom embed', '/afk - Set AFK',
-        '/invites - View invites', '/botinfo - Bot info', '/panel - Bot dashboard'
-      ],
-      Role: [
-        '/addrole - Add role', '/removerole - Remove role', '/roles - List roles',
-        '/createrole - Create role', '/deleterole - Delete role'
-      ]
-    };
-
-    const container = document.getElementById('commands');
-    for (const category in commandData) {
-      const section = document.createElement('div');
-      const heading = document.createElement('h2');
-      heading.textContent = category + " ⚙️";
-      section.appendChild(heading);
-
-      const ul = document.createElement('ul');
-      commandData[category].forEach(cmd => {
-        const li = document.createElement('li');
-        li.textContent = cmd;
-        ul.appendChild(li);
-      });
-      section.appendChild(ul);
-      container.appendChild(section);
-    }
-
-    const messages = document.getElementById("chatbot-messages");
-    const input = document.getElementById("userInput");
-
-    function addMessage(sender, text) {
-      const msg = document.createElement("div");
-      msg.textContent = `${sender}: ${text}`;
-      messages.appendChild(msg);
-      messages.scrollTop = messages.scrollHeight;
-      twemoji.parse(msg); // add emoji rendering
-    }
-
-    function sendMessage() {
-      const text = input.value.trim();
-      if (!text) return;
-      addMessage("You", text);
-      input.value = "";
-
-      setTimeout(() => {
-        let reply = "🤖 I'm here to help! Ask about commands, roles, or events!";
-        const lower = text.toLowerCase();
-        if (lower.includes("invite")) reply = "🚀 Here's the invite link: https://discord.com/oauth2/authorize?client_id=1373308171317149736";
-        else if (lower.includes("commands")) reply = "📜 Scroll down to see all the command categories!";
-        else if (lower.includes("role")) reply = "🎭 Use /addrole or /removerole to manage roles!";
-        addMessage("Crazy Bot", reply);
-      }, 600);
-    }
-
-    input.addEventListener("keypress", function(event) {
-      if (event.key === "Enter") sendMessage();
-    });
-
-    window.onload = () => twemoji.parse(document.body);
-  </script>
 </body>
 </html>
-  
+
