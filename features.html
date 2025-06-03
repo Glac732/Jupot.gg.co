@@ -1,3 +1,160 @@
-/public/
-  ├── index.html         ← Homepage
-  └── features.html      ← Second page with bot features
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jupot Bot Features</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #000428, #004e92);
+      color: #ffffff;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      animation: glow 2s infinite alternate;
+    }
+
+    p.subtext {
+      font-size: 1.2rem;
+      color: #a0dfff;
+      text-align: center;
+      margin-bottom: 3rem;
+      max-width: 800px;
+    }
+
+    .features-list {
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: rgba(0, 0, 255, 0.15);
+      border-left: 5px solid cyan;
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    .feature-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+    }
+
+    .feature-title {
+      font-size: 1.4rem;
+      color: #0ff;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-desc {
+      font-size: 1rem;
+      color: #d0eaff;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      text-decoration: none;
+      font-size: 1rem;
+      color: cyan;
+      border: 2px solid cyan;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    a.back-link:hover {
+      background: cyan;
+      color: #000428;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 15px #00f, 0 0 30px #00f;
+      }
+      to {
+        text-shadow: 0 0 25px #0ff, 0 0 40px #0ff;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Jupot Features</h1>
+  <p class="subtext">The ultimate multipurpose Discord bot made by <strong>just_in1.1</strong>. Modern, techy, and protective for every server.</p>
+
+  <div class="features-list">
+    <div class="feature-card">
+      <div class="feature-title">🛡 Anti-Nuke</div>
+      <div class="feature-desc">Blocks mass banning, mass role/channel deletion, and other nukes instantly.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🚫 Anti-Mod Abuse</div>
+      <div class="feature-desc">Stops rogue mods from banning, kicking, or changing key server settings.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🎮 Fun Commands</div>
+      <div class="feature-desc">Memes, jokes, 8ball, fun games and randomizers to keep your server alive.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🔧 Moderation</div>
+      <div class="feature-desc">Warn, mute, kick, ban, timeout, logs — all with easy-to-use commands.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🔍 Utility</div>
+      <div class="feature-desc">Uptime checker, server info, user info, avatar view, and more tools.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">⚙ Custom Prefix</div>
+      <div class="feature-desc">Let each server set their own command prefix with one command.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🚀 24/7 Online</div>
+      <div class="feature-desc">Hosted in the cloud for full uptime and reliability across servers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">🌐 Global Commands</div>
+      <div class="feature-desc">Slash commands available instantly on every server — no setup needed.</div>
+    </div>
+  </div>
+
+  <a class="back-link" href="index.html">← Back to Home</a>
+</body>
+</html>
