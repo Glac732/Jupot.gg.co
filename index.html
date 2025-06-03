@@ -12,70 +12,120 @@
       box-sizing: border-box;
       font-family: 'Orbitron', sans-serif;
     }
+
     body {
       background: linear-gradient(to right, #000428, #004e92);
       color: white;
       height: 100vh;
       overflow: hidden;
     }
-    .container {
+
+    .welcome-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      background: inherit;
+      animation: fadeOut 3s ease-in-out 2s forwards;
+      z-index: 10;
+    }
+
+    .welcome-screen h1 {
+      font-size: 5rem;
+      color: white;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from {
+        text-shadow: 0 0 10px #0099ff;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffff;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .container {
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       text-align: center;
-      animation: fadeIn 3s ease-in-out;
+      animation: fadeInMain 2s ease-in-out;
     }
-    h1 {
-      font-size: 4rem;
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #00f, 0 0 20px #00f;
-      }
-      to {
-        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
-      }
-    }
-    @keyframes fadeIn {
+
+    @keyframes fadeInMain {
       from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
       }
       to {
         opacity: 1;
         transform: scale(1);
       }
     }
+
     .buttons {
       margin-top: 2rem;
     }
+
     .btn {
       padding: 1rem 2rem;
       font-size: 1.2rem;
       margin: 1rem;
-      background: #00f;
+      background: #00bfff;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
+
     .btn:hover {
-      background: #0ff;
+      background: #00ffff;
       color: black;
+      transform: scale(1.05);
     }
+
     .about {
       margin-top: 2rem;
       font-size: 1.1rem;
+      color: #cceeff;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .welcome-screen h1 {
+        font-size: 3rem;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- Welcome Animation -->
+  <div class="welcome-screen" id="welcome">
     <h1>WELCOME TO JUPOT</h1>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" id="mainContent">
     <div class="buttons">
       <a href="features.html"><button class="btn">Features</button></a>
       <a href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&permissions=8&scope=bot"><button class="btn">Invite Bot</button></a>
@@ -84,5 +134,14 @@
       <p>Made by just_in1.1 | A techy and attractive bot website</p>
     </div>
   </div>
+
+  <script>
+    // Show main content after welcome fades out
+    setTimeout(() => {
+      document.getElementById("welcome").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+    }, 5000); // 5 seconds
+  </script>
+
 </body>
 </html>
