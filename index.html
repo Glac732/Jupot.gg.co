@@ -1,678 +1,88 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Install & About Jupot Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Jupot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-
-    /* Reset & base */
     * {
-      box-sizing: border-box;
-    }
-'use client';
-import { useEffect, useRef } from 'react';
-
-export default function HomePage() {
-  const welcomeRef = useRef(null);
-  const mainRef = useRef(null);
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (welcomeRef.current && mainRef.current) {
-        welcomeRef.current.classList.add('hide');
-        mainRef.current.classList.add('show');
-      }
-    }, 3000);
-
-    const openModal = () => modalRef.current.classList.remove('hide');
-    const closeModal = () => modalRef.current.classList.add('hide');
-
-    const aboutBtn = document.getElementById('about-button');
-    const closeBtn = document.getElementById('close-button');
-
-    aboutBtn?.addEventListener('click', openModal);
-    closeBtn?.addEventListener('click', closeModal);
-
-    return () => {
-      clearTimeout(timer);
-      aboutBtn?.removeEventListener('click', openModal);
-      closeBtn?.removeEventListener('click', closeModal);
-    };
-  }, []);
-
-  return (
-    <div>
-      <style jsx>{`
-        body {
-          margin: 0;
-          font-family: 'Arial', sans-serif;
-          background-color: #0a0a0a;
-          color: white;
-          overflow: hidden;
-        }
-        .welcome, .main {
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          background-color: #0a0a0a;
-          transition: opacity 1s ease;
-        }
-        .welcome {
-          z-index: 2;
-        }
-        .welcome.hide {
-          opacity: 0;
-          pointer-events: none;
-        }
-        .main {
-          opacity: 0;
-          pointer-events: none;
-        }
-        .main.show {
-          opacity: 1;
-          pointer-events: auto;
-        }
-        h1.glow {
-          font-size: 5rem;
-          text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
-          animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-          0%, 100% { text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff; }
-          50% { text-shadow: 0 0 30px #0ff, 0 0 50px #0ff, 0 0 70px #0ff; }
-        }
-        .buttons {
-          margin-top: 20px;
-          display: flex;
-          gap: 20px;
-        }
-        button {
-          padding: 10px 20px;
-          font-size: 1rem;
-          border: none;
-          border-radius: 5px;
-          background-color: #111;
-          color: #0ff;
-          cursor: pointer;
-          box-shadow: 0 0 10px #0ff;
-          transition: background 0.3s;
-        }
-        button:hover {
-          background-color: #0ff;
-          color: #000;
-        }
-        .modal {
-          position: fixed;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0,0,0,0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 3;
-        }
-        .modal.hide {
-          display: none;
-        }
-        .modal-content {
-          background: #111;
-          padding: 30px;
-          border-radius: 10px;
-          box-shadow: 0 0 20px #0ff;
-          max-width: 500px;
-          text-align: center;
-        }
-        .modal-content h2 {
-          margin-top: 0;
-          color: #0ff;
-        }
-        .modal-content p {
-          margin: 15px 0;
-        }
-      `}</style>
-
-      {/* Welcome Screen */}
-      <div className="welcome" ref={welcomeRef}>
-        <h1 className="glow">Jupot</h1>
-      </div>
-
-      {/* Main Screen */}
-      <div className="main" ref={mainRef}>
-        <h1>Welcome to Jupot</h1>
-        <div className="buttons">
-          <button id="about-button">About</button>
-          <button onClick={() => window.location.href = '/dashboard'}>Dashboard</button>
-        </div>
-      </div>
-
-      {/* About Modal */}
-      <div className="modal hide" ref={modalRef}>
-        <div className="modal-content">
-          <h2>About Jupot</h2>
-          <p>Jupot is a multipurpose Discord bot focused on utility and performance.</p>
-          <button id="close-button">Close</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-    body {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #000428, #004e92);
+      color: white;
       height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background-color: #1a0000;
-      background-image: radial-gradient(circle at center, #380000 0%, #1a0000 60%);
       overflow: hidden;
+    }
+    .container {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #ff4c4c;
-      text-align: center;
-      position: relative;
-      animation: bgPulse 12s ease-in-out infinite;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @keyframes bgPulse {
-      0%, 100% {
-        background-size: 100% 100%;
-        filter: brightness(1);
-      }
-      50% {
-        background-size: 105% 105%;
-        filter: brightness(1.1);
-      }
-    }
-
-    /* Container Styles */
-    .container, .welcome-container {
-      background: rgba(60, 0, 0, 0.65);
-      padding: 4rem 5rem;
-      border-radius: 20px;
-      box-shadow:
-        0 0 12px 3px #cc4444,
-        0 0 40px 10px #aa2222,
-        inset 0 0 60px 10px #bb2222;
-      max-width: 600px;
-      width: 90vw;
-      max-height: 90vh;
-      user-select: none;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Welcome Screen */
-    .welcome-container {
-      font-size: 5vw;
-      font-weight: 900;
-      letter-spacing: 10px;
-      color: #ff4c4c;
-      text-shadow:
-        0 0 6px #ff4444aa,
-        0 0 12px #ff555533,
-        0 0 18px #ff666600;
-      animation: neonPulse 3.5s ease-in-out infinite alternate;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 220px;
-    }
-
-    @keyframes neonPulse {
-      0%, 100% {
-        text-shadow:
-          0 0 5px #ff2c2c99,
-          0 0 10px #ff3d3d88,
-          0 0 20px #ff4e4e77;
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        text-shadow:
-          0 0 12px #ff3a3aaa,
-          0 0 24px #ff5a5aaa,
-          0 0 40px #ff7070aa;
-        opacity: 0.87;
-        transform: scale(1.05);
-      }
-    }
-
-    /* Main Content - hidden initially */
-    .main-content {
-      display: none;
-      animation: fadeScaleIn 1.6s ease forwards;
-      color: #ffb0b0;
-      outline: none;
-    }
-
-    @keyframes fadeScaleIn {
-      0% {opacity: 0; transform: scale(0.92);}
-      100% {opacity: 1; transform: scale(1);}
-    }
-
-    /* Heading & Text */
-    h1 {
-      font-size: 5vw;
-      margin-bottom: 1rem;
-      letter-spacing: 5px;
-      color: #ff5555;
-      text-shadow:
-        0 0 6px #ff2222cc,
-        0 0 12px #ff4949cc;
-      user-select: text;
-    }
-
-    p {
-      font-size: 1.75vw;
-      margin-bottom: 3rem;
-      color: #ff8383;
-      text-shadow:
-        0 0 4px #b2222233;
-      user-select: text;
-    }
-
-    /* Flex container for buttons */
-    .btn-group {
-      display: flex;
-      gap: 2.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-
-    /* Glowing red neon buttons (shared style) */
-    .button {
-      flex: 1 1 180px;
-      min-width: 180px;
-      max-width: 280px;
-      background: #ff2222;
-      color: #ffe5e5;
-      font-weight: 700;
-      font-size: 1.8vw;
-      padding: 1rem 3rem;
-      border-radius: 60px;
-      text-decoration: none;
-      box-shadow:
-        0 0 8px #ff4444,
-        0 0 20px #ff1111,
-        inset 0 0 35px 6px #ff2222;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      filter: drop-shadow(0 0 6px #ff3333);
-      cursor: pointer;
-      user-select: none;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      box-sizing: border-box;
-      border: none;
-    }
-    .button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: rgba(255, 0, 0, 0.18);
-      border-radius: 50%;
-      transition: transform 0.5s ease;
-      z-index: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    .button:hover::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    .button:hover {
-      background-color: #ff4747;
-      box-shadow:
-        0 0 20px #ff5555,
-        0 0 45px #ff7777,
-        inset 0 0 50px 10px #ff5555;
-      color: #fff8f8;
-      filter: drop-shadow(0 0 14px #ff6565);
-      transform: translateY(-5px) scale(1.05);
-      z-index: 1;
-    }
-    .button:active {
-      transform: translateY(-2px) scale(1);
-      box-shadow:
-        0 0 14px #ff4444,
-        inset 0 0 30px 6px #ff4444;
-    }
-
-    /* Animated emoji styles */
-    .animated-emoji {
-      display: inline-block;
-      animation: floatPulse 3s ease-in-out infinite alternate;
-      font-size: 1.4em;
-      transform-origin: center bottom;
-      user-select: none;
-    }
-    .animated-emoji:nth-child(odd) {
-      animation-delay: 0s;
-    }
-    .animated-emoji:nth-child(even) {
-      animation-delay: 1.5s;
-    }
-
-    @keyframes floatPulse {
-      0% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-6px) scale(1.1);
-      }
-      100% {
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 3rem;
-      font-size: 1.2vw;
-      color: #ff6464cc;
-      text-shadow:
-        0 0 5px #b2222299;
-      user-select: none;
-    }
-
-    /* Modal overlay */
-    #aboutModal {
-      position: fixed;
-      inset: 0;
-      background: rgba(40, 0, 0, 0.95);
-      backdrop-filter: blur(8px);
-      display: none;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 2rem 4rem;
-      z-index: 1000;
-      color: #ffb5b5;
-      overflow-y: auto;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      box-sizing: border-box;
-      animation: modalFadeIn 0.8s ease forwards;
+      animation: fadeIn 3s ease-in-out;
     }
-    #aboutModal.show {
-      display: flex;
+    h1 {
+      font-size: 4rem;
+      animation: glow 2s infinite alternate;
     }
-    @keyframes modalFadeIn {
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00f, 0 0 20px #00f;
+      }
+      to {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+      }
+    }
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: scale(0.85);
+        transform: scale(0.8);
       }
       to {
         opacity: 1;
         transform: scale(1);
       }
     }
-
-    /* Modal content container */
-    #aboutContent {
-      max-width: 700px;
-      background: rgba(70, 0, 0, 0.7);
-      border-radius: 16px;
-      padding: 3rem 4rem;
-      box-shadow:
-        0 0 30px 8px #ff2a2a88,
-        inset 0 0 40px 15px #ff1a1aaa;
-      user-select: text;
-    }
-
-    #aboutContent h2 {
-      font-size: 3.2rem;
-      margin-bottom: 1rem;
-      color: #ff4444;
-      text-shadow:
-        0 0 12px #ff2a2aaa;
-    }
-
-    #aboutContent ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 2rem 0;
-      font-size: 1.8rem;
-      line-height: 1.6;
-      color: #ff9999;
-      text-shadow:
-        0 0 5px #bb444488;
-      user-select: none;
-    }
-
-    #aboutContent ul li {
-      margin-bottom: 1.2rem;
-      position: relative;
-      padding-left: 2.5em;
-      font-weight: 600;
-      text-align: left;
-    }
-    #aboutContent ul li .animated-emoji {
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 2em;
-      filter: drop-shadow(0 0 2px #ff3a3a);
-      user-select: none;
-      pointer-events: none;
-    }
-
-    #aboutContent p {
-      font-size: 1.5rem;
-      color: #ff7a7a;
-      user-select: text;
-    }
-
-    /* Modal close button */
-    #aboutClose {
+    .buttons {
       margin-top: 2rem;
-      background: transparent;
-      border: 2px solid #ff5555;
-      color: #ff5555;
-      font-size: 1.6rem;
-      padding: 0.7rem 2rem;
-      border-radius: 60px;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      margin: 1rem;
+      background: #00f;
+      color: white;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow:
-        0 0 8px #ff4444,
-        inset 0 0 25px 5px #ff2222;
-      transition: all 0.3s ease;
-      user-select: none;
-      font-family: 'Poppins', sans-serif;
-      filter: drop-shadow(0 0 6px #ff3333);
+      transition: background 0.3s;
     }
-    #aboutClose:hover {
-      background: #ff4444;
-      color: #fff8f8;
-      box-shadow:
-        0 0 18px #ff6666,
-        inset 0 0 35px 8px #ff5555;
-      transform: scale(1.05);
+    .btn:hover {
+      background: #0ff;
+      color: black;
     }
-    #aboutClose:focus {
-      outline: none;
-      box-shadow:
-        0 0 25px #ff8888,
-        inset 0 0 40px 10px #ff7777;
-    }
-
-    /* Responsive adjustments on large screens */
-    @media screen and (min-width: 2560px) {
-      .container, .welcome-container {
-        max-width: 900px;
-        padding: 6rem 7rem;
-      }
-      h1 {
-        font-size: 100px;
-      }
-      p {
-        font-size: 32px;
-      }
-      .button {
-        font-size: 32px;
-        padding: 1.25rem 6rem;
-      }
-      footer {
-        font-size: 18px;
-      }
-      #aboutContent h2 {
-        font-size: 56px;
-      }
-      #aboutContent ul {
-        font-size: 28px;
-      }
-      #aboutContent p {
-        font-size: 24px;
-      }
-      #aboutClose {
-        font-size: 28px;
-        padding: 1rem 3rem;
-        border-width: 3px;
-      }
+    .about {
+      margin-top: 2rem;
+      font-size: 1.1rem;
     }
   </style>
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div class="welcome-container" id="welcome" aria-live="polite" role="region" aria-label="Welcome message to Jupot">
-    WELCOME TO JUPOT
-  </div>
-
-  <!-- Main Content: Hidden initially -->
-  <div class="container main-content" id="mainContent" role="main" tabindex="-1" aria-label="Jupot Bot Installation">
-    <h1>Jupot</h1>
-    <p>Install the Jupot Discord Bot now to elevate your server experience!</p>
-    <div class="btn-group" role="group" aria-label="Jupot bot actions">
-      <a
-        href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&permissions=8&scope=bot"
-        class="button"
-        aria-label="Install Jupot Bot on Discord"
-        target="_blank"
-        rel="noopener noreferrer"
-      >&#x1F680; Add Jupot to Your Server</a>
-      <button id="aboutBtn" class="button" aria-haspopup="dialog" aria-controls="aboutModal" aria-expanded="false">
-        &#x1F52E; About Jupot
-      </button>
+  <div class="container">
+    <h1>WELCOME TO JUPOT</h1>
+    <div class="buttons">
+      <a href="features.html"><button class="btn">Features</button></a>
+      <a href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&permissions=8&scope=bot"><button class="btn">Invite Bot</button></a>
     </div>
-    <footer>© 2024 Jupot.gg.bot</footer>
-  </div>
-
-  <!-- About Modal -->
-  <div id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" tabindex="-1" >
-    <div id="aboutContent" tabindex="0">
-      <h2 id="aboutTitle">About Jupot</h2>
-      <ul>
-        <li><span class="animated-emoji" aria-hidden="true">🛡️</span> ANTINUKE</li>
-        <li><span class="animated-emoji" aria-hidden="true">🚫</span> ANTIMOD</li>
-        <li><span class="animated-emoji" aria-hidden="true">🛠️</span> UTILITY</li>
-        <li><span class="animated-emoji" aria-hidden="true">🎉</span> FUN</li>
-        <li><span class="animated-emoji" aria-hidden="true">✨</span> AND MORE!</li>
-      </ul>
-      <p>Enhance your Discord server with the best in moderation, protection, and entertainment — designed with 4K quality and an incredible user experience. Jupot brings unmatched power and fun to your community.</p>
-      <button id="aboutClose" aria-label="Close About Jupot dialog">Close</button>
+    <div class="about">
+      <p>Made by just_in1.1 | A techy and attractive bot website</p>
     </div>
   </div>
-
-  <script>
-    // Hide welcome after delay, show main content
-    setTimeout(() => {
-      const welcome = document.getElementById('welcome');
-      const main = document.getElementById('mainContent');
-
-      welcome.style.transition = "opacity 0.8s ease";
-      welcome.style.opacity = 0;
-
-      setTimeout(() => {
-        welcome.style.display = 'none';
-
-        main.style.display = 'block';
-        main.focus();
-      }, 800);
-    }, 3000);
-
-    const aboutBtn = document.getElementById('aboutBtn');
-    const aboutModal = document.getElementById('aboutModal');
-    const aboutClose = document.getElementById('aboutClose');
-    const mainContent = document.getElementById('mainContent');
-
-    // Open modal function
-    function openModal() {
-      aboutModal.classList.add('show');
-      aboutBtn.setAttribute('aria-expanded', 'true');
-      aboutClose.focus();
-      // Trap focus inside modal
-      trapFocus(aboutModal);
-    }
-
-    // Close modal function
-    function closeModal() {
-      aboutModal.classList.remove('show');
-      aboutBtn.setAttribute('aria-expanded', 'false');
-      aboutBtn.focus();
-      releaseFocusTrap();
-    }
-
-    aboutBtn.addEventListener('click', openModal);
-    aboutClose.addEventListener('click', closeModal);
-
-    // Close modal on Esc key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "Escape" && aboutModal.classList.contains('show')) {
-        e.preventDefault();
-        closeModal();
-      }
-    });
-
-    // Focus trap implementation
-    let focusableElements = null;
-    let firstFocusable = null;
-    let lastFocusable = null;
-
-    function trapFocus(element) {
-      focusableElements = element.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
-      if (!focusableElements.length) return;
-
-      firstFocusable = focusableElements[0];
-      lastFocusable = focusableElements[focusableElements.length - 1];
-
-      element.addEventListener('keydown', handleTrap);
-
-      function handleTrap(e) {
-        if (e.key !== 'Tab') return;
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstFocusable) {
-            e.preventDefault();
-            lastFocusable.focus();
-          }
-        } else {
-          if (document.activeElement === lastFocusable) {
-            e.preventDefault();
-            firstFocusable.focus();
-          }
-        }
-      }
-
-      element._handleTrap = handleTrap;
-    }
-
-    function releaseFocusTrap() {
-      if (aboutModal._handleTrap) {
-        aboutModal.removeEventListener('keydown', aboutModal._handleTrap);
-        aboutModal._handleTrap = null;
-      }
-    }
-  </script>
 </body>
 </html>
