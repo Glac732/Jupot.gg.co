@@ -13,11 +13,20 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-    body {
-      background: linear-gradient(to right, #000428, #004e92);
-      color: white;
-      height: 100vh;
+    body, html {
+      height: 100%;
       overflow: hidden;
+    }
+
+    video.bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      filter: brightness(0.3) blur(1px);
     }
 
     .welcome-screen {
@@ -29,7 +38,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: inherit;
+      background: rgba(0, 0, 0, 0.6);
       animation: fadeOut 3s ease-in-out 2s forwards;
       z-index: 10;
     }
@@ -38,6 +47,7 @@
       font-size: 5rem;
       color: white;
       animation: pulseGlow 2s infinite alternate;
+      text-align: center;
     }
 
     @keyframes pulseGlow {
@@ -63,6 +73,7 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
+      color: white;
       animation: fadeInMain 2s ease-in-out;
     }
 
@@ -85,7 +96,7 @@
       padding: 1rem 2rem;
       font-size: 1.2rem;
       margin: 1rem;
-      background: #00bfff;
+      background: rgba(0, 191, 255, 0.8);
       color: white;
       border: none;
       border-radius: 12px;
@@ -119,6 +130,12 @@
 </head>
 <body>
 
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="bg.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
   <!-- Welcome Animation -->
   <div class="welcome-screen" id="welcome">
     <h1>WELCOME TO JUPOT</h1>
@@ -140,8 +157,9 @@
     setTimeout(() => {
       document.getElementById("welcome").style.display = "none";
       document.getElementById("mainContent").style.display = "flex";
-    }, 5000); // 5 seconds
+    }, 5000);
   </script>
 
 </body>
 </html>
+
