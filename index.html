@@ -1,164 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Jupot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jupot - The Ultimate Discord Bot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-    body, html {
-      height: 100%;
-      overflow: hidden;
-    }
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: #0a0f30;
+    color: #c0d1ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    video.bg-video {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
-      filter: brightness(0.3) blur(1px);
-    }
+  /* Animated Gradient Background */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right:0; bottom: 0;
+    background: linear-gradient(270deg, #224dff, #67aaff, #112244, #1e3a8a);
+    background-size: 800% 800%;
+    animation: backgroundColorShift 45s ease infinite;
+    filter: blur(60px);
+    opacity: 0.7;
+    z-index: -2;
+  }
 
-    .welcome-screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.6);
-      animation: fadeOut 3s ease-in-out 2s forwards;
-      z-index: 10;
-    }
+  @keyframes backgroundColorShift {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
 
-    .welcome-screen h1 {
-      font-size: 5rem;
-      color: white;
-      animation: pulseGlow 2s infinite alternate;
-      text-align: center;
-    }
+  /* Animated glowing particles (abstract) */
+  .particle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px #5a8bffcc);
+    animation-timing-function: linear;
+  }
+  /* We will create 30 particles with random properties in JS */
 
-    @keyframes pulseGlow {
-      from {
-        text-shadow: 0 0 10px #0099ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffff;
-      }
-    }
+  /* Container */
+  .container {
+    text-align: center;
+    max-width: 960px;
+    width: 90vw;
+    padding: 3rem 2rem;
+    background: rgba(6,15,40,0.35);
+    border-radius: 2rem;
+    box-shadow:
+      0 0 50px #2f5cffaa,
+      inset 0 0 120px #3c76ffa8;
+    backdrop-filter: saturate(180%) blur(40px);
+  }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
+  /* Title with glowing and shadow */
+  .title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 600;
+    color: #a1b9ff;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.3em;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 5px #7f9eff,
+      0 0 20px #5a84ff,
+      0 5px 30px #324cb9;
+    animation: textGlowPulse 3.2s ease-in-out infinite alternate;
+  }
 
+  @keyframes textGlowPulse {
+    0% {
+      text-shadow:
+        0 0 5px #7f9eff,
+        0 0 20px #5a84ff,
+        0 5px 30px #324cb9;
+    }
+    100% {
+      text-shadow:
+        0 0 15px #aac3ff,
+        0 0 40px #7f9eff,
+        0 10px 50px #4570ff;
+    }
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.75rem);
+    color: #c4d0ffcc;
+    letter-spacing: 0.06em;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    text-shadow: 0 0 7px #657cffaa;
+  }
+
+  /* Awesome Invite button */
+  .invite-button {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    padding: 1.2rem 4rem;
+    color: #e6edff;
+    text-transform: uppercase;
+    border-radius: 90px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #3e64ff, #1e3db9);
+    box-shadow:
+      0 0 20px #718cff,
+      0 0 40px #4064ff,
+      inset 0 0 100px #4a74ff;
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.45s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .invite-button:hover {
+    transform: scale(1.15);
+    box-shadow:
+      0 0 32px #a8bfff,
+      0 0 60px #6090ff,
+      inset 0 0 160px #547dff;
+  }
+  .invite-button:active {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 22px #7a9fff,
+      inset 0 0 90px #3558db;
+  }
+
+  /* Button glow animation */
+  .invite-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      60deg,
+      #4f72ff,
+      #2e49c7,
+      #3a59d1,
+      #3f66ff,
+      #2b4588,
+      #4f72ff
+    );
+    background-size: 400% 400%;
+    animation: bgCycle 7s linear infinite;
+    filter: blur(30px);
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+    border-radius: 90px;
+    z-index: 0;
+  }
+
+  .invite-button:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes bgCycle {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Button text higher stack */
+  .invite-button span {
+    position: relative;
+    z-index: 1;
+    text-shadow:
+      0 0 5px #a1bcff,
+      0 0 12px #678dff;
+  }
+
+  /* Subtle shine animation on button text */
+  .invite-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -70%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.35) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shineMove 3.7s linear infinite;
+    border-radius: 90px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  @keyframes shineMove {
+    0% {
+      left: -70%;
+    }
+    100% {
+      left: 120%;
+    }
+  }
+
+  /* Footer text */
+  footer {
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    color: #a1b7ffcc;
+    user-select: none;
+    letter-spacing: 0.07em;
+  }
+
+  /* Large screen animation swirl */
+  .swirl {
+    pointer-events: none;
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, #405affaa 15%, transparent 40%),
+      radial-gradient(circle at 70% 70%, #618fff88 20%, transparent 50%);
+    filter: blur(90px);
+    animation: swirlRotate 45s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes swirlRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg);}
+  }
+
+  /* Responsive tweaks */
+  @media(max-width: 600px) {
     .container {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      color: white;
-      animation: fadeInMain 2s ease-in-out;
+      padding: 2rem 1.5rem;
+      width: 95vw;
     }
-
-    @keyframes fadeInMain {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .title {
+      font-size: 3.6rem;
     }
-
-    .buttons {
-      margin-top: 2rem;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
+    .subtitle {
       font-size: 1.2rem;
-      margin: 1rem;
-      background: rgba(0, 191, 255, 0.8);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
     }
-
-    .btn:hover {
-      background: #00ffff;
-      color: black;
-      transform: scale(1.05);
+    .invite-button {
+      width: 100%;
+      font-size: 1.4rem;
+      padding: 1rem 0;
     }
-
-    .about {
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      color: #cceeff;
-      opacity: 0.9;
-    }
-
-    @media (max-width: 768px) {
-      .welcome-screen h1 {
-        font-size: 3rem;
-      }
-      .btn {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-
-  <!-- Background Video -->
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="bg.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-
-  <!-- Welcome Animation -->
-  <div class="welcome-screen" id="welcome">
-    <h1>WELCOME TO JUPOT</h1>
-  </div>
-
-  <!-- Main Content -->
-  <div class="container" id="mainContent">
-    <div class="buttons">
-      <a href="features.html"><button class="btn">Features</button></a>
-      <a href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&permissions=8&scope=bot"><button class="btn">Invite Bot</button></a>
-    </div>
-    <div class="about">
-      <p>Made by just_in1.1 | A techy and attractive bot website</p>
-    </div>
-  </div>
+  <div class="swirl"></div>
+  <main class="container" role="main" aria-label="Jupot Landing Page">
+    <h1 class="title" aria-label="Jupot Bot Title">Jupot</h1>
+    <p class="subtitle" aria-label="Jupot Bot Tagline">The Ultimate, Most Powerful &amp; Sleek Discord Bot</p>
+    <a href="https://discord.com/api/oauth2/authorize?client_id=1378731315624542268&permissions=8&scope=bot" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      aria-label="Invite Jupot Bot"
+      class="invite-button"
+      role="button"
+    >
+      <span>Invite Jupot</span>
+    </a>
+  </main>
+  <footer>
+    &copy; 2024 Just_in1.1 &bull; Team Owner &bull; All Blue &bull; Ultimate Quality
+  </footer>
 
   <script>
-    // Show main content after welcome fades out
-    setTimeout(() => {
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("mainContent").style.display = "flex";
-    }, 5000);
+    // Generate animated glowing particles to enhance ambiance
+    const particleCount = 30;
+    for(let i=0; i<particleCount; i++){
+      const p = document.createElement('div');
+      p.classList.add('particle');
+
+      // Random size 8-15px
+      const size = Math.random()*7 + 8;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+
+      // Random position
+      p.style.top = Math.random()*100 + 'vh';
+      p.style.left = Math.random()*100 + 'vw';
+
+      // Random opacity for flicker range
+      p.style.opacity = (Math.random()*0.6 + 0.3).toFixed(2);
+
+      // Animation duration & delay for smooth movement
+      const duration = Math.random()*60 + 40;
+      p.style.animation = `particleMove ${duration}s linear infinite`;
+      p.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+
+      document.body.appendChild(p);
+    }
+
   </script>
+  <style>
+    /* Particle animations */
+    @keyframes particleMove {
+      0%   { transform: translate(0, 0) }
+      25%  { transform: translate(10px, -15px) }
+      50%  { transform: translate(20px, 5px) }
+      75%  { transform: translate(10px, 20px) }
+      100% { transform: translate(0, 0) }
+    }
+    .particle {
+      filter: drop-shadow(0 0 6px #628cffdd);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      background: radial-gradient(circle at center, #5f85ffdd, #1143d5);
+      will-change: transform;
+    }
+  </style>
 
 </body>
 </html>
